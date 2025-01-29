@@ -1,82 +1,35 @@
 <!DOCTYPE html>
+
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Daily Tracker</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-        }
-        input, textarea, button {
-            display: block;
-            width: 100%;
-            margin-bottom: 10px;
-            padding: 8px;
-        }
-        .entry {
-            border: 1px solid #ddd;
-            padding: 10px;
-            margin: 10px 0;
-        }
-    </style>
-</head>
-<body>
-    <h2>Daily Tracker</h2>
-    <label for="date">Date:</label>
-    <input type="date" id="date">
-    
-    <label for="mood">Mood:</label>
-    <input type="text" id="mood" placeholder="How are you feeling?">
-    
-    <label for="notes">Notes:</label>
-    <textarea id="notes" placeholder="Write about your day..."></textarea>
-    
-    <button onclick="saveEntry()">Save Entry</button>
-    
-    <h3>Previous Entries</h3>
-    <div id="entries"></div>
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", loadEntries);
 
-        function saveEntry() {
-            const date = document.getElementById("date").value;
-            const mood = document.getElementById("mood").value;
-            const notes = document.getElementById("notes").value;
-            
-            if (!date || !mood || !notes) {
-                alert("Please fill in all fields!");
-                return;
-            }
-            
-            const entry = { date, mood, notes };
-            let entries = JSON.parse(localStorage.getItem("dailyEntries")) || [];
-            entries.push(entry);
-            localStorage.setItem("dailyEntries", JSON.stringify(entries));
-            
-            document.getElementById("date").value = "";
-            document.getElementById("mood").value = "";
-            document.getElementById("notes").value = "";
-            
-            loadEntries();
-        }
+    <head>
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Personal Daily Tracker</title>
+        <link rel="stylesheet" href="styles/personal_note.css">
 
-        function loadEntries() {
-            const entriesDiv = document.getElementById("entries");
-            entriesDiv.innerHTML = "";
-            let entries = JSON.parse(localStorage.getItem("dailyEntries")) || [];
-            
-            entries.forEach(entry => {
-                const entryDiv = document.createElement("div");
-                entryDiv.classList.add("entry");
-                entryDiv.innerHTML = `<strong>${entry.date}</strong><br> Mood: ${entry.mood} <br> Notes: ${entry.notes}`;
-                entriesDiv.appendChild(entryDiv);
-            });
-        }
-    </script>
-</body>
+    </head>
+
+    <body>
+
+        <h2>Daily Tracker</h2>
+        <label for="date">Date:</label>
+        <input type="date" id="date">
+        
+        <label for="mood">Mood:</label>
+        <input type="text" id="mood" placeholder="How are you feeling?">
+        
+        <label for="notes">Notes:</label>
+        <textarea id="notes" placeholder="Write about your day..."></textarea>
+        
+        <button onclick="saveEntry()">Save Entry</button>
+        
+        <h3>Previous Entries</h3>
+        <div id="entries"></div>
+        
+        <script src="script/personal_note.js"></script>
+
+    </body>
+
 </html>
